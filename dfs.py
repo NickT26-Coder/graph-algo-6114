@@ -17,26 +17,43 @@ Psuedo Code:
 Runtime:
 
 '''
-from graph import graphADT
 
 # Implementation
+from graph import graphADT
+
+cycles = []
+
 def dfsAlgo(g: graphADT):
     s = []
+    visited = []
     for vertex in g.vertices:
         if vertex.color == "WHITE":
-            dfsVisit(g, vertex, s)
+            dfsVisit(vertex, s, visited)
 
-    topo = []
-    while s:
-        topo.append(s.pop())
+    if len(cycles) > 0:
+        return cycles
+    else:
+        topo = []
+        while s:
+            topo.append(s.pop())
 
-    return topo
+        return topo
 
-def dfsVisit(g: graphADT, u: graphADT.vertex, s: list[str]):
+def dfsVisit(u: graphADT.vertex, s: list[str], visited: list[str]):
     u.color = "GRAY"
-    for edge in u.edges:
-        neighbor_vertex = edge[0]
+    visited.append(u.data)
+    for i in range(len(u.edges)):
+        neighbor_vertex = u.edges[i][0]
         if neighbor_vertex.color == "WHITE":
-            dfsVisit(g, neighbor_vertex, s)
+            dfsVisit(neighbor_vertex, s, visited)
+        elif neighbor_vertex.color == "GRAY":
+            # Found cycle
+            j = len(visited) - 1
+            while visited[j] != neighbor_vertex.data: j-=1
+            cycle = visited[j:len(visited)]
+            cycles.append((cycle, len(cycle)))
+            return True
+
     u.color = "BLACK"
+    visited.remove(u.data)
     s.append(u.data)
