@@ -1,36 +1,22 @@
-class graph:
-    class vertex:
-        def __init__(self, data: str):
-            self.data = data
-            self.color = "WHITE"
-            self.edges = []
-        
-    def __init__(self, type: str):
-        self.type = type
-        self.vertices = []
-        self.edges = []
+from dfs import dfsAlgo
+from graph import graphADT
 
-    def findVertex(self, v: str) -> vertex | None:
-        for vertex in self.vertices:
-            if vertex.data == v:
-                return vertex
-        return None
-
-    def insertVertex(self, v: str) -> None:
-        self.vertices.append(self.vertex(v))
-
-    def insertEdge(self, u: str, v: str, weight: int) -> None:
-        u = self.findVertex(u)
-        v = self.findVertex(v)
-
-        self.edges.append((u, v, weight))
-        if self.type == "D":
-            u.edges.append((v, weight))
-        else:
-            u.edges.append((v, weight))
-            v.edges.append((u, weight))
-
-g = graph("D")
+g = graphADT("D")
 g.insertVertex("A")
 g.insertVertex("B")
+g.insertVertex("C")
+g.insertVertex("D")
+g.insertVertex("E")
+g.insertVertex("F")
 g.insertEdge("A", "B", 1)
+g.insertEdge("A", "C", 1)
+g.insertEdge("B", "C", 1)
+g.insertEdge("B", "D", 3)
+g.insertEdge("B", "E", 2)
+g.insertEdge("C", "D", 1)
+g.insertEdge("C", "E", 2)
+g.insertEdge("D", "E", 4)
+g.insertEdge("D", "F", 1)
+g.insertEdge("E", "F", 1)
+
+dfsAlgo(g)
