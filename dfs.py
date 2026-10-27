@@ -21,15 +21,22 @@ from graph import graphADT
 
 # Implementation
 def dfsAlgo(g: graphADT):
+    s = []
     for vertex in g.vertices:
         if vertex.color == "WHITE":
-            dfsVisit(g, vertex)
+            dfsVisit(g, vertex, s)
 
-def dfsVisit(g: graphADT, u: graphADT.vertex):
+    topo = []
+    while s:
+        topo.append(s.pop())
+
+    return topo
+
+def dfsVisit(g: graphADT, u: graphADT.vertex, s: list[str]):
     u.color = "GRAY"
     for edge in u.edges:
         neighbor_vertex = edge[0]
         if neighbor_vertex.color == "WHITE":
-            dfsVisit(g, neighbor_vertex)
-    print(u.data)
+            dfsVisit(g, neighbor_vertex, s)
     u.color = "BLACK"
+    s.append(u.data)
