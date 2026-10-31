@@ -3,7 +3,7 @@ class graphADT:
         def __init__(self, data: str):
             self.data = data
             self.color = "WHITE"
-            self.edges = set()
+            self.edges = []
         
     def __init__(self, type: str):
         self.type = type
@@ -31,8 +31,9 @@ class graphADT:
         v = self.findVertex(v)
 
         self.edges.append((u, v, weight))
-        if self.type == "D":
-            u.edges.add((v, weight))
-        else:
-            u.edges.add((v, weight))
-            v.edges.add((u, weight))
+        if (v, weight) not in u.edges:
+            if self.type == "D":
+                u.edges.append((v, weight))
+            else:
+                u.edges.append((v, weight))
+                v.edges.append((u, weight))
