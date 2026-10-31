@@ -31,8 +31,9 @@ class graphADT:
         v = self.findVertex(v)
 
         self.edges.append((u, v, weight))
-        if self.type == "D":
-            u.edges.append((v, weight))
-        else:
-            u.edges.append((v, weight))
-            v.edges.append((u, weight))
+        if (v, weight) not in u.edges:
+            if self.type == "D":
+                u.edges.append((v, weight))
+            else:
+                u.edges.append((v, weight))
+                v.edges.append((u, weight))
