@@ -36,7 +36,6 @@ dfsVisit(v, s, visited) ->
         elif neightbor_vertex = Gray ->
             obtain cycle as a new list
             append cycle to list of cycles
-            return True
 
     v.color = Black
     v.remove(v.data), remove finished node
@@ -86,7 +85,6 @@ def dfsVisit(u: graphADT.vertex, s: list[str], visited: list[str]):
             while visited[j] != neighbor_vertex.data: j-=1
             cycle = visited[j:len(visited)]
             cycles.append((cycle, len(cycle)))
-            return True
 
     u.color = "BLACK"
     visited.remove(u.data)
