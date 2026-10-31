@@ -10,6 +10,13 @@ class graphADT:
         self.vertices = []
         self.edges = []
 
+    def __str__(self):
+        result = ""
+        for vertex in self.vertices:
+            result += vertex.data + "\n"
+
+        return result
+
     def findVertex(self, v: str) -> vertex | None:
         for vertex in self.vertices:
             if vertex.data == v:
