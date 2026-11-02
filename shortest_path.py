@@ -52,3 +52,37 @@ Algo dijkstras(Graph g, Source_Val s)
 Runtime:
 
 '''
+from graph import graphADT
+from heap import insert_to_heap, remove_min
+import math
+
+def dijkstrasAlgo(g: graphADT, s: str) -> None:
+    dist = {}
+    prev = {}
+    heap = []
+    s = g.findVertex(s)
+    for vertex in g.vertices:
+        if vertex != s:
+            dist[vertex] = math.inf
+        prev[vertex] = None
+    dist[s] = 0
+    insert_to_heap(heap, (s, dist[s]))
+    while heap:
+        u = remove_min(heap)
+        for (v, w) in u.edges:
+             if dist[v] > dist[u] + w:
+                dist[v] = dist[u] + w
+                prev[v] = u
+                insert_to_heap(heap, (v, dist[v]))
+
+    return (prev, dist)
+
+def displayPath(g, prev, dist):
+    for v in g.vertices:
+        p = v
+        print(f"Shortest path from source to {v.data}: ")
+        while p:
+            print(p.data)
+            p = prev[p]
+        print("Shortest Path Cost: ")
+        print(dist[v])
