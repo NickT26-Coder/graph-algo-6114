@@ -1,4 +1,5 @@
 from dfs import dfsAlgo
+from shortest_path import dijkstrasAlgo, displayPath
 from graph import graphADT
 
 
@@ -9,7 +10,7 @@ def createGraphFromFile(filename: str) -> graphADT:
         g = graphADT(type=header[2])
         for row in f:
             data = row.strip().split(" ")
-            u, v, w = data[0], data[1], data[2]
+            u, v, w = data[0], data[1], int(data[2])
             if not values.get(u):
                 values[u] = True
                 g.insertVertex(u)
@@ -22,6 +23,8 @@ def createGraphFromFile(filename: str) -> graphADT:
     return g
             
 
-g = createGraphFromFile("graph-ex.txt")
+if __name__ == "__main__":
+    g = createGraphFromFile("graph10_shortest_undirected_cluster.txt")
 
-print(dfsAlgo(g))
+    (prev, dist) = dijkstrasAlgo(g, "V0")
+    displayPath(g, prev, dist)
