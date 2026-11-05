@@ -50,25 +50,31 @@ Algo dijkstras(Graph g, Source_Val s)
 
 
 Runtime:
+- Total: O(elog(v)), we heapify for every edge that is removed from the heap
 
 '''
 from graph import graphADT
 from heap import insert_to_heap, remove_min
 import math
 
-def dijkstrasAlgo(g: graphADT, s: str) -> None:
+def dijkstrasAlgo(g: graphADT, s: str) -> tuple:
     dist = {}
     prev = {}
     heap = []
+    # O(v)
     s = g.findVertex(s)
+    # O(v)
     for vertex in g.vertices:
         if vertex != s:
             dist[vertex] = math.inf
         prev[vertex] = None
     dist[s] = 0
     insert_to_heap(heap, (s, dist[s]))
+    # If the graph is connected, every edge will at one point be in the heap, O(e)
     while heap:
+        # O(log(v)), heapify after removing the root
         u = remove_min(heap)
+        # O(v.e), number of edges for that vertice
         for (v, w) in u.edges:
              if dist[v] > dist[u] + w:
                 dist[v] = dist[u] + w
