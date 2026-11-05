@@ -1,5 +1,6 @@
 from dfs import dfsAlgo
 from shortest_path import dijkstrasAlgo, displayPath
+from kruskal import kruskalAlgo
 from graph import graphADT
 
 
@@ -24,7 +25,16 @@ def createGraphFromFile(filename: str) -> graphADT:
             
 
 if __name__ == "__main__":
-    g = createGraphFromFile("graph10_shortest_undirected_cluster.txt")
+    g = createGraphFromFile("filename.txt")
 
-    (prev, dist) = dijkstrasAlgo(g, "V0")
-    displayPath(g, prev, dist)
+    # Test Shortest Path
+    # (prev, path) = dijkstrasAlgo(g, source="V0")
+    # displayPath(g, prev, path)
+
+    # Test Kruskal's
+    # kruskalAlgo(g)
+
+    # Test DFS / Topo Sort
+    # print(dfsAlgo(g))
+
+
