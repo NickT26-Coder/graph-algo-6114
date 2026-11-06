@@ -24,6 +24,7 @@ def remove_min(heap):
         # swap the last node with the root (the smallest value)
         heap[0], heap[len(heap)-1] = heap[len(heap)-1], heap[0]
     i = 0
+    heap.pop()
     # terminate when heap[i] is a leaf node or when the children are greater than heap[i]
     while 2*i+2 <= len(heap)-1 and (heap[i][1] > heap[2*i+1][1] or heap[i][1] > heap[2*i+2][1]):
         if heap[2*i+1][1] > heap[2*i+2][1]:
@@ -32,7 +33,6 @@ def remove_min(heap):
         else:
             heap[i], heap[2*i+1] = heap[2*i+1], heap[i]
             i = 2*i+1
-    heap.pop()
     return minimum_vertex
 
 # if __name__ == "__main__":

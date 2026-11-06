@@ -1,0 +1,10 @@
+6 9 U
+A D 5
+C F 1
+C D 8
+D E 9
+A B 2
+A C 7
+C E 2
+B D 9
+B F 5
