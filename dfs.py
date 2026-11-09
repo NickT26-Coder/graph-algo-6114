@@ -2,7 +2,7 @@
 What is DFS / Topological Sort on a graph?
 
 DFS:
-Search "deeper" in the graph whenever possible. Uses a stack to explore the edges of
+Search "deeper" in the graph whenever possible. Uses a STACK to explore the edges of
 the most recently discovered node if they have more nodes to explore. Return back to the
 original node that was searched once edges have been exhausted and move onto to the next
 until all nodes are visited. DFS is used for cycle finding which is determined by presence of a back edge.
@@ -42,7 +42,7 @@ dfsVisit(v, s, visited) ->
     s.append(v.data), add to recursive stack
 
 Runtime:
-Total = O(V + E)
+Total = O(V + E + V1)
 Runtime explained in comments in code below
 
 '''
@@ -81,7 +81,7 @@ def dfsVisit(u: graphADT.vertex, s: list[str], visited: list[str]):
         elif neighbor_vertex.color == "GRAY":
             # Found cycle
             j = len(visited) - 1
-            # O(v), loops back to a previous instance of the same node to create a cycle list
+            # O(v1), v1 = vertices already visited that aren't black, loops back to a previous instance of the same node to create a cycle list
             while visited[j] != neighbor_vertex.data: j-=1
             cycle = visited[j:len(visited)]
             cycles.append((cycle, len(cycle)))
