@@ -1,6 +1,8 @@
 '''
-Kruskal's Algorithm works by using sets to represents "clouds" of the currently explored graph. The algorithm explores the graph by first sorting the edges of the graph 
-by there weights and then selecting the edge with lowest weight at each iteration. You would then add this vertex to a set but, you have two vertices u and v. If u is already 
+Kruskal's Algorithm works by using SETS to represents "clouds" of the currently explored graph. 
+The algorithm explores the graph by first sorting the edges of the graph 
+by there weights and then selecting the edge with lowest weight at each iteration. 
+You would then add this vertex to a set but, you have two vertices u and v. If u is already 
 in the same set as v then you don't add(union) to the set and move onto the next edge. 
 
 Psuedo Code:
@@ -29,9 +31,16 @@ Algo FIND-SET(vertex, sets) ->
       return s
     
 Runtime:
-O(elog(e)), e = number of edges in the graph
+O(Elog(E)), E = number of edges in the graph
 The sorting of the edges has the highest time complexity out of all the summative operations.
 Check comments in code below
+
+Although, if it is fully connected graph
+O(elog(v)) since E <= V^2
+Elog(E) = Elog(V^2) = 2Elog(V) = O(Elog(V))
+Credit: https://stackoverflow.com/questions/20432801/time-complexity-of-the-kruskal-algorithm
+
+With graphs, the number of edges is at most V^2 or as little as V. In Kruskal's it is worse to have a denser graph with more edges to sort.
 
 '''
 from graph import graphADT
